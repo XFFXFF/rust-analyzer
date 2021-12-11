@@ -38,7 +38,6 @@ mod tests;
 use std::{
     fmt::{self, Debug},
     hash::{Hash, Hasher},
-    marker::PhantomData,
     ops::Index,
     sync::Arc,
 };
@@ -325,12 +324,11 @@ pub trait ItemTreeNode: Clone {
 
 pub struct FileItemTreeId<N: ItemTreeNode> {
     index: Idx<N>,
-    _p: PhantomData<N>,
 }
 
 impl<N: ItemTreeNode> Clone for FileItemTreeId<N> {
     fn clone(&self) -> Self {
-        Self { index: self.index, _p: PhantomData }
+        Self { index: self.index }
     }
 }
 impl<N: ItemTreeNode> Copy for FileItemTreeId<N> {}
